@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="hi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101116">
+  <title>Personal Digital Card</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+  <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
+  <header class="topbar">
+    <a class="wordmark" href="#">PERSONAL<span> / CARD</span></a>
+    <a class="admin-link" href="#admin">Admin <span aria-hidden="true">↗</span></a>
+  </header>
+
+  <main class="shell">
+    <section class="hero panel">
+      <div class="avatar-wrap"><img id="avatar" src="assets/avatar-placeholder.svg" alt="Profile photo"></div>
+      <p class="eyebrow" id="role">MUSICIAN · ARTIST</p>
+      <h1 id="full-name">Your Name</h1>
+      <p class="bio" id="bio">A short introduction about yourself goes here.</p>
+      <div class="hero-actions">
+        <a class="button button-primary" id="email-link" href="mailto:hello@example.com">Say Hello <span>↗</span></a>
+        <a class="button button-quiet" href="#about">Know More</a>
+      </div>
+      <div class="scroll-note">SCROLL TO CONNECT <span>↓</span></div>
+    </section>
+
+    <section class="section panel" id="about">
+      <p class="eyebrow">A LITTLE INTRODUCTION</p>
+      <h2>About <em>Me</em></h2>
+      <p class="body-copy" id="about-text">Write a few lines about who you are, what you do, and what you love.</p>
+    </section>
+
+    <section class="section panel">
+      <p class="eyebrow">LET'S STAY CONNECTED</p>
+      <h2>Find me <em>online</em></h2>
+      <div class="social-grid" id="social-list"><p class="muted">Social links will appear here.</p></div>
+    </section>
+
+    <section class="section private-panel panel">
+      <div>
+        <p class="eyebrow">SOME THINGS ARE PERSONAL</p>
+        <h2>Private <em>details</em></h2>
+        <p class="body-copy">Some contact information is shared only with people I approve. Sign in with your email to request access.</p>
+      </div>
+      <form id="request-form" class="request-form">
+        <label for="request-email">Your email address</label>
+        <input id="request-email" type="email" placeholder="you@example.com" autocomplete="email" required>
+        <label for="request-message">Message (optional)</label>
+        <textarea id="request-message" rows="3" placeholder="Tell me briefly why you'd like to connect"></textarea>
+        <button class="button button-primary full" type="submit">Send access request <span>→</span></button>
+        <p class="form-note" id="request-status" aria-live="polite">We’ll email you a secure sign-in link first.</p>
+      </form>
+      <div id="private-area" class="private-area" hidden></div>
+    </section>
+
+    <section class="admin-section panel" id="admin">
+      <div class="admin-heading"><div><p class="eyebrow">OWNER ACCESS</p><h2>Admin <em>panel</em></h2></div><span class="admin-lock">● PRIVATE</span></div>
+      <form id="login-form" class="login-form">
+        <label for="admin-email">Admin email</label>
+        <input id="admin-email" type="email" placeholder="Your email address" required>
+        <button class="button button-quiet full" type="submit">Send secure login link</button>
+        <p class="form-note" id="login-status" aria-live="polite">Only the account added as an admin in Supabase can manage this site.</p>
+      </form>
+      <div id="admin-dashboard" hidden>
+        <div class="dashboard-top"><p id="admin-welcome" class="muted"></p><button id="logout-button" class="text-button" type="button">Sign out</button></div>
+        <form id="profile-form" class="editor-form">
+          <h3>Edit public profile</h3>
+          <label>Full name<input name="full_name" maxlength="80" required></label>
+          <label>Professional title<input name="role" maxlength="100"></label>
+          <label>Short bio<textarea name="bio" rows="2" maxlength="240"></textarea></label>
+          <label>About me<textarea name="about" rows="4" maxlength="1200"></textarea></label>
+          <label>Profile photo URL<input name="avatar_url" type="url" placeholder="https://..."></label>
+          <label>Public email<input name="public_email" type="email"></label>
+          <button class="button button-primary full" type="submit">Save profile</button>
+          <p class="form-note" id="profile-status" aria-live="polite"></p>
+        </form>
+        <form id="social-form" class="editor-form">
+          <h3>Add a social link</h3>
+          <label>Platform<input name="platform" placeholder="Instagram" maxlength="40" required></label>
+          <label>Link URL<input name="url" type="url" placeholder="https://instagram.com/..." required></label>
+          <button class="button button-quiet full" type="submit">Add social link</button>
+          <p class="form-note" id="social-status" aria-live="polite"></p>
+        </form>
+        <div class="editor-form">
+          <h3>Manage access requests</h3>
+          <div id="requests-list"><p class="muted">Loading requests…</p></div>
+        </div>
+        <form id="private-form" class="editor-form">
+          <h3>Private contact details</h3>
+          <p class="form-note">These values are stored separately and are never included in the public profile response.</p>
+          <label>Private phone<input name="phone" type="text" maxlength="40"></label>
+          <label>Private email<input name="email" type="email"></label>
+          <label>Other private information<textarea name="other" rows="3" maxlength="1000"></textarea></label>
+          <button class="button button-primary full" type="submit">Save private details</button>
+          <p class="form-note" id="private-status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer><span id="footer-name">YOUR NAME</span><span>MADE TO CONNECT · <span id="year"></span></span></footer>
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
